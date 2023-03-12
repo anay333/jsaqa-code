@@ -1,10 +1,9 @@
 let page;
-jest.setTimeout(100000)
 
 beforeEach(async () => {
    page = await browser.newPage();
-  await page.goto("https://github.com/team");
-
+   await page.goto("https://github.com/team");
+   jest.setTimeout(100000)
 });
 
 afterEach(() => {
