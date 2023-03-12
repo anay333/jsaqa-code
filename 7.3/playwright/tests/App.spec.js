@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-var email= require(./user.js);
-var password= require(./user.js);
+var email = require(./user.js);
+var password = require(./user.js);
 
 test ('test1', async ({ page }) => {
   await page.goto('https://netology.ru/');
