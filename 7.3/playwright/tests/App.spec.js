@@ -1,4 +1,6 @@
 import { test, expect } from '@playwright/test';
+var email= require(./user.js);
+var password= require(./user.js);
 
 test ('test1', async ({ page }) => {
   await page.goto('https://netology.ru/');
@@ -13,7 +15,7 @@ test ('test1', async ({ page }) => {
 test ('test2', async ({ page }) => {
     await page.goto('https://netology.ru/');
     await page.getByRole('link', { name: 'Войти' }).click();
-    await page.getByPlaceholder('Email').fill('anay_1991@bk.ru');;
+    await page.getByPlaceholder('Email').fill('email');;
     await page.getByPlaceholder('Пароль').fill('123');
     await page.getByTestId('login-submit-btn').click();
     await expect(page.getByTestId('login-error-hint')).toHaveText('Вы ввели неправильно логин или пароль');
