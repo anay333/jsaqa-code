@@ -1,4 +1,3 @@
-const { FormatterBuilder } = require("cucumber");
 const { clickElement, getText} = require("./lib/commands.js");
 
 let page;
