@@ -1,25 +1,15 @@
-Feature: Cinema Ticket
+Feature: Buy ticket
+  Scenario: Should book a movie ticket
+    Given user is on "qamid" page
+    When user user is booking a movie ticket
+    Then user sees the booking confirmation
 
-    Scenario: Should user book one ticket
-        Given user is on "/index.php"
-        When user chooses day 2
-        When user chooses "time" 
-        When user chooses "chair"
-        When user click "button" 
-        Then user received "Вы выбрали билеты:"
+  Scenario: Should book multiple movie tickets
+    Given user is on "qamid" page
+    When user user is booking multiple tickets
+    Then user sees the booking confirmation
 
-    Scenario: Should user book two tickets
-        Given user is on "/index.php"
-        When user chooses day 2
-        When user chooses "time" 
-        When user chooses "chair"
-        When user click "button" 
-        Then user received "Вы выбрали билеты:"
-
-    Scenario: Should not book taken chair
-        Given user is on "/index.php"
-        When user chooses day 2
-        When user chooses "time" 
-        When user chooses "chair"
-        When user click "button" 
-        Then user sees button "disabled"
+  Scenario: Should not re-booking a booked movie ticket
+    Given user is on "qamid" page
+    When user re-booking a booked movie ticket
+    Then user sees disabled button
