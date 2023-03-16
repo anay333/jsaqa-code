@@ -1,10 +1,10 @@
 const puppeteer = require("puppeteer");
 const chai = require("chai");
 const expect = chai.expect;
-const { Given, When, Then, Before, After } = require("cucumber");
-const { getText, clickElement } = require("../../lib/commands.js");
+const { Given, When, Then, Before, After } = require("@cucumber/cucumber");
+const { clickElement, getText } = require("../../lib/commands.js");
 
-Before(async function () {
+Before({timeout: 30000}, async function () {
   const browser = await puppeteer.launch({ headless: false, slowMo: 50 });
   const page = await browser.newPage();
   this.browser = browser;
@@ -18,19 +18,28 @@ After(async function () {
 });
 
 Given("user is on {string} page", {timeout:60000}, async function (string) {
-  return await this.page.goto(`https://qamid.tmweb.ru/client${string}`, {
+  return await this.page.goto(`http://qamid.tmweb.ru/client${string}`, {
     setTimeout: 100000,
   });
 });
 
-When("user clicksElement {string}",{timeout:60000}, async function (string) {
-  return await clickElement(this.page, "body > nav > a:nth-child(7)", string);
-});
-When("user clicksNextElement {string}",{timeout:60000}, async function (string) {
-  return await clickElement(this.page, "body > main > section:nth-child(1) > div.movie-seances__hall > ul > li:nth-child(1) > a", string);
+When("When user chooses day {int}", async function (int) {
+ return await clickElement(this.page, `a:nth-child(${int}) > span.page-nav__day-week`);
 });
 
-Then("user sees the page  {string}", async function (string) {
-  const actual = await getText(this.page, "body > main > section > button");
-  expect(actual).contains(string);
+When("When user chooses {string}"), async function (string) {
+  return await clickElement(this.page,`a.movie-seances__${time}`);
+};
+When("When user chooses {string}"), async function (string) {
+  return await clickElement(this.page,`.buying-scheme__${chair}_standart:not(.buying-scheme__chair_taken)`);
+};
+
+When("user click {string}", async function (string) {
+  return await clickElement(this.page, `button.acceptin-${button}`);
+});
+
+Then("user sees text {string}", async function (string) {
+  const actual = await getText(this.page, `h2.ticket__${check-title}`);
+  const expected = await string;
+  expect(actual).contains(expected);
 });
